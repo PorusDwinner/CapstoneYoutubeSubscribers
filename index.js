@@ -1,7 +1,7 @@
 const express = require('express');
 const app = require('./app');
 const mongoose = require('mongoose');
-const port = 3000;
+const port = process.env.port || 3000;
 
 // Parser JSON bodies
 mongoose.set('strictQuery' , false);
