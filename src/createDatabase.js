@@ -1,12 +1,16 @@
 const mongoose = require('mongoose');
 const Subscriber = require('./model/subscriberSchema');
 const data = require('./data');
+require('dotenv').config();
+console.log(process.env.ATLAS_PASSWORD);
+console.log(process.env.ATLAS_USERNAME);
 
-// Connect To Database
-// Make sure mongoDB is installed locally to work with the code below
-const connectionString = 'mongodb://localhost/subscribers';
+// CONNECTION TO DATABASE
+const connectionString = `mongodb+srv://${process.env.ATLAS_USERNAME}:${process.env.ATLAS_PASSWORD}@cluster0.q23poih.mongodb.net/?retryWrites=true&w=majority`;
+console.log(connectionString);
 
-// Since the code below will return a promise,
+
+// mongoose.connect will return a promise,so
 // we are using .then() for resolve & .catch() for error
 
 mongoose.connect(connectionString , {
@@ -14,6 +18,7 @@ mongoose.connect(connectionString , {
 })
 .then(() => console.log('Connected...'))
 .catch((err) => console.log('Failed To Connect : ', err));
+
 
 // Refresh data in subscribers collection in DB
 const refreshData = async() => {
